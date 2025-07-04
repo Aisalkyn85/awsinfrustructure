@@ -2,11 +2,12 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "example" {
-  bucket = "tf-example-bucket-${random_id.bucket_id.hex}"
-  force_destroy = true
-}
+resource "aws_instance" "example" {
+  ami           = "ami-05ffe3c48a9991133"
+  instance_type = "t2.micro"
+  key_name      = "my-key"  
 
-resource "random_id" "bucket_id" {
-  byte_length = 4
+  tags = {
+    Name = "TerraformEC2Example"
+  }
 }
